@@ -2,15 +2,23 @@ let tg = window.Telegram.WebApp;
 
 tg.expand();
 
-tg.MainButton.textColor = "#FFFFFF";
-tg.MainButton.color = "#FF00FF";
+// tg.expand();
 
-let btn = document.getElementById("btn");
+// tg.MainButton.textColor = "#FFFFFF";
+// tg.MainButton.color = "#FF00FF";
 
-btn.addEventListener( "click", function(){
+// let btn = document.getElementById("btn");
 
-    tg.MainButton.setText( "Сообщение отправлено!" );
-    tg.MainButton.show();
-    tg.sendData( "sendTestMessage" );
+// btn.addEventListener( "click", function(){
 
-});
+//     tg.MainButton.setText( "Сообщение отправлено!" );
+//     tg.MainButton.show();
+//     tg.sendData( "sendTestMessage" );
+
+// });
+
+let data = document.getElementById( "data" );
+let p = document.createElement( "p" );
+p.innerText = tg.initDataUnsafe.first_name;
+
+data.appendChild( p );
