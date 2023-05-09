@@ -5,7 +5,7 @@
 })(jQuery);
 
 var Cafe = {
-  canPay: false,
+  canPay: true,
   modeOrder: false,
   totalPrice: 0,
 
