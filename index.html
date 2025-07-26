@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Vlad Maska — Portfolio</title>
+    <link rel="stylesheet" href="./style.css" />
+</head>
+
+<body>
+    <header>Vlad Maska — Portfolio</header>
+    <nav>
+
+        <button id="toggleTheme" aria-label="Toggle theme">☀️</button>
+        
+        <a href="https://github.com/VladMaska" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="https://www.linkedin.com/in/vladmaska/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="https://t.me/vladmaska" target="_blank" rel="noopener noreferrer">Telegram</a>
+        <a href="mailto:vlad.maska@proton.me">Email</a>
+
+        <!-- <label for="languageSelect" style="margin-left:1rem; color: #a9b0ce; user-select:none;">🌐</label> -->
+        <select id="languageSelect" aria-label="Language selector" style="background:#3a3a4d; color:#dcdce6; border:none; border-radius:4px; padding: 2px 6px; font-size: 1rem; cursor: pointer; right: 0;">
+            <option value="en" data-flag="🇬🇧">English 🇬🇧</option>
+            <option value="ru" data-flag="🇷🇺">Русский 🇷🇺</option>
+            <option value="pl" data-flag="🇵🇱">Polski 🇵🇱</option>
+            <option value="uk" data-flag="🇺🇦">Українська 🇺🇦</option>
+        </select>
+
+    </nav>
+
+    <main>
+        <section class="about">
+            <h2 id="aboutTitle">About Me</h2>
+            <p id="aboutText">Hi, I'm Vlad. I specialize in Unity C#, Python scripting, and I have a growing passion for
+                web development. I love open-source, creating tools and games, and constantly learning new technologies.
+            </p>
+        </section>
+
+        <section id="skills">
+            <h2 id="skillsTitle">Skills</h2>
+            <ul class="skills-list" id="skillsList">
+                <!-- Навыки вставятся из JS -->
+            </ul>
+        </section>
+
+        <section id="projects">
+            <h2 id="projectsTitle">Projects</h2>
+            <ul class="projects-list" id="projectsList">
+                <!-- Проекты вставятся из JS -->
+            </ul>
+        </section>
+
+        <section class="github-repos">
+            <h2 id="reposTitle">GitHub Repositories</h2>
+            <input id="repoFilter" type="text" placeholder="Filter repos by name..." />
+            <div id="repos">Loading...</div>
+        </section>
+    </main>
+
+    <footer>© 2025 Vlad Maska</footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

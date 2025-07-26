@@ -1,0 +1,269 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  background: #2e2e3e;
+  color: #dcdce6;
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  transition: background 0.3s, color 0.3s;
+}
+
+header {
+  background: #3a3a4d;
+  padding: 1rem 2rem;
+  text-align: center;
+  border-bottom: 1px solid #555;
+  color: #9aa0b4;
+  font-size: 1.8rem;
+  font-weight: 700;
+  user-select: none;
+}
+
+select#languageSelect {
+  background: #3a3a4d;
+  color: #dcdce6;
+  border: none;
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+body.light-theme select#languageSelect {
+  background: #f7f7f7 !important;
+  color: #222 !important;
+  border: none !important;
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  padding: 0.6rem 0;
+  background: #3a3a4d;
+  border-bottom: 1px solid #555;
+  color: #a9b0ce;
+  flex-wrap: wrap;
+}
+
+nav a {
+  color: #a9b0ce;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+nav a:hover {
+  color: #e0e0ff;
+  text-decoration: underline;
+}
+
+button#toggleTheme {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.4rem;
+  color: #a9b0ce;
+  transition: color 0.3s;
+}
+
+button#toggleTheme:hover {
+  color: #e0e0ff;
+}
+
+/* Языковой переключатель с флагами */
+#languageSwitcher {
+  display: inline-flex;
+  gap: 8px;
+  margin-left: 1rem;
+  align-items: center;
+}
+
+.lang-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.6rem;
+  padding: 0;
+  opacity: 0.6;
+  transition: opacity 0.3s;
+}
+
+.lang-btn:hover {
+  opacity: 1;
+}
+
+.lang-btn.active {
+  opacity: 1;
+  outline: 2px solid #61dafb;
+  border-radius: 4px;
+}
+
+main {
+  flex-grow: 1;
+  max-width: 700px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+section {
+  margin-bottom: 2.5rem;
+}
+
+h2 {
+  font-weight: 700;
+  font-size: 1.5rem;
+  border-bottom: 2px solid #555;
+  padding-bottom: 0.3rem;
+  margin-bottom: 1rem;
+  color: #c3c7dc;
+}
+
+ul.skills-list li,
+ul.projects-list li {
+  background: #41415a;
+  margin-bottom: 0.6rem;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  color: #c3c7dc;
+  font-weight: 500;
+}
+
+.github-repos #repoFilter {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 12px;
+  border-radius: 4px;
+  border: 1px solid #555;
+  font-size: 1rem;
+  box-sizing: border-box;
+  background: #41415a;
+  color: #dcdce6;
+}
+
+.github-repos .repo {
+  background: #3a3a4d;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 6px;
+  border: 1px solid #555;
+}
+
+.github-repos .repo h3 {
+  margin: 0 0 0.5rem;
+  color: #a9b0ce;
+}
+
+.github-repos .repo h3 a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.github-repos .repo h3 a:hover {
+  text-decoration: underline;
+}
+
+.github-repos .repo p {
+  margin: 0 0 0.3rem;
+  color: #b0b3cc;
+}
+
+.github-repos small {
+  color: #888ca0;
+}
+
+footer {
+  text-align: center;
+  padding: 1rem 0;
+  background: #3a3a4d;
+  color: #888ca0;
+  border-top: 1px solid #555;
+  font-size: 0.9rem;
+  user-select: none;
+}
+
+/* Светлая тема */
+body.light-theme {
+  background: #fff;
+  color: #222;
+}
+
+body.light-theme header,
+body.light-theme nav,
+body.light-theme footer {
+  background: #f7f7f7;
+  border-color: #ddd;
+  color: #333;
+}
+
+body.light-theme nav a {
+  color: #007acc;
+}
+
+body.light-theme nav a:hover {
+  color: #004a99;
+}
+
+body.light-theme button#toggleTheme {
+  color: #007acc;
+}
+
+body.light-theme button#toggleTheme:hover {
+  color: #004a99;
+}
+
+body.light-theme main {
+  color: #222;
+}
+
+body.light-theme h2 {
+  border-color: #ccc;
+  color: #444;
+}
+
+body.light-theme ul.skills-list li,
+body.light-theme ul.projects-list li {
+  background: #eee;
+  color: #333;
+  font-weight: 500;
+}
+
+body.light-theme .github-repos #repoFilter {
+  background: #fff;
+  color: #222;
+  border: 1px solid #ccc;
+}
+
+body.light-theme .github-repos .repo {
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  color: #222;
+}
+
+body.light-theme .github-repos .repo h3 {
+  color: #007acc;
+}
+
+body.light-theme .github-repos .repo h3 a:hover {
+  color: #004a99;
+}
+
+body.light-theme .github-repos .repo p {
+  color: #555;
+}
+
+body.light-theme .github-repos small {
+  color: #888;
+}
+
+@media (max-width: 480px) {
+  main {
+    margin: 1rem;
+  }
+  header {
+    font-size: 1.4rem;
+  }
+}
