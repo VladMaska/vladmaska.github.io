@@ -1,0 +1,14 @@
+/* TEAM */
+Developer: Vlad Maska
+GitHub: https://github.com/VladMaska
+Location: Poland
+Email: your.email@example.com
+
+/* SITE */
+Last update: 2025-07-26
+Standards: HTML5, CSS3, ES6+
+Software: VSCode, GitHub Pages
+Frameworks/Libraries: None (vanilla JS)
+
+/* NOTE */
+This is a personal portfolio website showcasing projects and skills in Unity C#, Python, and web development.
