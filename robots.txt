@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://vladmaska.github.io/sitemap.xml
