@@ -39,7 +39,11 @@ const texts = {
       {name: "Python Automation Script", desc: "Скрипт для автоматизации рутинных задач в Linux."}
     ],
     reposTitle: "Репозитории GitHub",
-    repoFilterPlaceholder: "Фильтр репозиториев по названию..."
+    repoFilterPlaceholder: "Фильтр репозиториев по названию...",
+    languageLabel: "Язык",
+    noDescription: "Нет описания",
+    noReposFound: "Репозитории не найдены",
+    loading: "Загрузка..."
   },
   en: {
     aboutTitle: "About Me",
@@ -60,7 +64,11 @@ const texts = {
       {name: "Python Automation Script", desc: "Automates daily tasks and file management on Linux."}
     ],
     reposTitle: "GitHub Repositories",
-    repoFilterPlaceholder: "Filter repos by name..."
+    repoFilterPlaceholder: "Filter repos by name...",
+    languageLabel: "Language",
+    noDescription: "No description",
+    noReposFound: "No repositories found",
+    loading: "Loading..."
   },
   pl: {
     aboutTitle: "O mnie",
@@ -81,7 +89,11 @@ const texts = {
       {name: "Python Automation Script", desc: "Automatyzuje codzienne zadania i zarządzanie plikami w Linux."}
     ],
     reposTitle: "Repozytoria GitHub",
-    repoFilterPlaceholder: "Filtruj repozytoria po nazwie..."
+    repoFilterPlaceholder: "Filtruj repozytoria po nazwie...",
+    languageLabel: "Język",
+    noDescription: "Brak opisu",
+    noReposFound: "Nie znaleziono repozytoriów",
+    loading: "Ładowanie..."
   },
   uk: {
     aboutTitle: "Про мене",
@@ -102,7 +114,11 @@ const texts = {
       {name: "Python Automation Script", desc: "Скрипт для автоматизації рутинних задач у Linux."}
     ],
     reposTitle: "Репозиторії GitHub",
-    repoFilterPlaceholder: "Фільтр репозиторіїв за назвою..."
+    repoFilterPlaceholder: "Фільтр репозиторіїв за назвою...",
+    languageLabel: "Мова",
+    noDescription: "Немає опису",
+    noReposFound: "Репозиторії не знайдені",
+    loading: "Завантаження..."
   }
 };
 
@@ -143,32 +159,29 @@ function updateLanguage(lang) {
   }
 }
 
-languageSelect.addEventListener('change', () => {
-  const selectedLang = languageSelect.value;
-  updateLanguage(selectedLang);
-  localStorage.setItem('language', selectedLang);
-});
-
 // --- Загрузка репозиториев с GitHub и фильтр ---
-async function fetchRepos() {
+async function fetchRepos(lang) {
   const reposContainer = document.getElementById('repos');
-  reposContainer.textContent = 'Loading...';
+  reposContainer.textContent = texts[lang].loading;
 
   try {
     const res = await fetch('https://api.github.com/users/VladMaska/repos?sort=updated&per_page=50');
     const repos = await res.json();
 
     if (!Array.isArray(repos) || repos.length === 0) {
-      reposContainer.innerHTML = '<p>No repositories found.</p>';
+      reposContainer.innerHTML = `<p>${texts[lang].noReposFound}</p>`;
       return;
     }
 
     function renderRepos(list) {
+      const langLabel = texts[lang].languageLabel;
+      const noDesc = texts[lang].noDescription;
+
       reposContainer.innerHTML = list.map(r => `
         <div class="repo">
           <h3><a href="${r.html_url}" target="_blank" rel="noopener noreferrer">${r.name}</a></h3>
-          <p>${r.description || 'No description'}</p>
-          <small>⭐ ${r.stargazers_count} | 🍴 ${r.forks_count}</small>
+          <p>${r.description || noDesc}</p>
+          <small>⭐ ${r.stargazers_count} | 🍴 ${r.forks_count} | ${langLabel}: ${r.language || 'N/A'}</small>
         </div>
       `).join('');
     }
@@ -200,5 +213,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const savedLang = localStorage.getItem('language') || 'en'; // по умолчанию English
   updateLanguage(savedLang);
 
-  fetchRepos();
+  fetchRepos(savedLang);
+});
+
+languageSelect.addEventListener('change', () => {
+  const selectedLang = languageSelect.value;
+  updateLanguage(selectedLang);
+  localStorage.setItem('language', selectedLang);
+  fetchRepos(selectedLang); // Перезагружаем репозитории с новым языком
 });
